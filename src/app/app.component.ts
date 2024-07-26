@@ -2,6 +2,7 @@ import {Component, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
+import {PATHS} from "./app.routes";
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { faGhost } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppComponent {
   readonly faGhost = faGhost;
+  readonly PATHS = PATHS;
   readonly mobileMenuOpened = signal(false);
 
   toggleMobileMenu() {
