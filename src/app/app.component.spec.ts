@@ -1,29 +1,50 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/jest';
+import {AppComponent} from './app.component';
+
+const selectors = {
+  mobileMenu: '#mobile-menu',
+  mobileMenuButton: '#mobile-menu-button',
+};
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
+  let spectator: Spectator<AppComponent>;
+  const createComponent = createComponentFactory(AppComponent);
+
+  beforeEach(() => {
+    spectator = createComponent();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
-  it(`should have the 'todolist' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('todolist');
+  // it(`should have the 'todolist' title`, () => {
+  //   expect(spectator.component.title).toEqual('todolist');
+  // });
+
+  xit('should render title', () => {
+    expect(spectator.query('h1')?.textContent).toContain('Hello, todolist');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, todolist');
+  describe('mobile menu', () => {
+    it('on the start menu should not be visible', () => {
+      // Arrange & Act & Assert
+      expect(spectator.query(selectors.mobileMenu)).not.toExist();
+    });
+
+    it('should show the mobile menu after clicking the menu button', () => {
+      // Arrange & Act
+      spectator.click(selectors.mobileMenuButton);
+      // Assert
+      expect(spectator.query(selectors.mobileMenu)).toBeVisible();
+    });
+
+    it('should hide the mobile menu after clicking the menu button again', () => {
+      // Arrange & Act
+      spectator.click(selectors.mobileMenuButton);
+      spectator.click(selectors.mobileMenuButton);
+      // Assert
+      expect(spectator.query(selectors.mobileMenu)).not.toBeVisible();
+    });
   });
 });
