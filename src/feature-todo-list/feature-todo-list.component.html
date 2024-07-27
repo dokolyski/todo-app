@@ -1,1 +1,5 @@
-<p>feature-todo-list works!</p>
+<div class="p-4">
+  <app-ui-todo-filter class="block mb-4" (searchTermChanged)="searchTermChanged($event)"/>
+  <hr>
+  <app-ui-todo-list [todos]="filteredTodos()"/>
+</div>

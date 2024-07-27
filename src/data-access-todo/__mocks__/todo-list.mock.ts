@@ -1,32 +1,34 @@
-export const TODO_LIST_MOCK = [
+import {Todo} from "../todo.store";
+
+export const TODO_LIST_MOCK: Todo[] = [
   {
-    date: '2020-01-01',
+    id: 1,
+    date: '2024-07-26T10:00',
     location: 'Home',
     content: 'Clean the house',
-    display: true
   },
   {
-    date: '2020-01-02',
+    id: 2,
+    date: '2024-07-27T12:40',
     location: 'Work',
     content: 'Finish the report',
-    display: true
   },
   {
-    date: '2020-01-03',
+    id: 3,
+    date: '2024-07-28T06:02',
     location: 'Home',
     content: 'Buy groceries',
-    display: true
   },
   {
-    date: '2020-01-04',
+    id: 4,
+    date: '2024-07-30T10:00',
     location: 'Home',
     content: 'Walk the dog',
-    display: true
   },
   {
-    date: '2020-01-05',
+    id: 5,
+    date: '2024-08-20T10:00',
     location: 'Home',
     content: 'Mow the lawn',
-    display: false
   }
 ];
