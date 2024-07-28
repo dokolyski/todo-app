@@ -1,5 +1,5 @@
 import {patchState, signalStore, withComputed, withHooks, withMethods, withState} from "@ngrx/signals";
-import {setEntities, withEntities} from "@ngrx/signals/entities";
+import {addEntity, setEntities, withEntities} from "@ngrx/signals/entities";
 import {TODO_LIST_MOCK} from "./__mocks__/todo-list.mock";
 import {computed} from "@angular/core";
 import {DateTimeString} from "../shared/types/date-time-string.type";
@@ -32,9 +32,17 @@ export const TodoStore = signalStore(
     },
     setSearchTerm: (searchTerm: string) => {
       patchState(store, {searchTerm});
+    },
+    addTodo: (todo: Omit<Todo, 'id'>) => {
+      patchState(store, addEntity({...todo, id: generateId(store.entities().length)}));
     }
   })),
   withComputed((store) => ({
     filteredTodos: computed(() => store.entities().filter(todo => isMatchingSearchTerm(store.searchTerm().trim().split(' '), todo, ['date', 'location', 'content']))),
   }))
 )
+
+// works only assuming that existing entities have ids in range 1..entitiesLength
+function generateId(entitiesLength: number) {
+  return entitiesLength + 1;
+}

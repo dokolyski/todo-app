@@ -1,23 +1,49 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FeatureAddTodoComponent } from './feature-add-todo.component';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/jest';
+import {FeatureAddTodoComponent} from './feature-add-todo.component';
+import {PATHS} from "../app/app.routes";
+import {TodoStore} from "../data-access-todo";
 
 describe('FeatureAddTodoComponent', () => {
-  let component: FeatureAddTodoComponent;
-  let fixture: ComponentFixture<FeatureAddTodoComponent>;
+  let spectator: Spectator<FeatureAddTodoComponent>;
+  const createComponent = createComponentFactory(FeatureAddTodoComponent);
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FeatureAddTodoComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(FeatureAddTodoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
+  });
+
+  describe('after form submission', () => {
+    it('should navigate to the todo list page', () => {
+      // Arrange
+      const navigateByUrlSpy = jest.spyOn(spectator.component['_router'], 'navigateByUrl');
+
+      // Act
+      spectator.component.createTodo({
+        date: '2022-01-01T10:00',
+        location: 'location',
+        content: 'content'
+      });
+
+      // Assert
+      expect(navigateByUrlSpy).toHaveBeenCalledWith(PATHS.todoListPage);
+    });
+
+    it('should add a todo to the store', () => {
+      // Act
+      spectator.component.createTodo({
+        date: '2022-01-01T10:00',
+        location: 'location',
+        content: 'content'
+      });
+      // Assert
+      expect(spectator.inject(TodoStore).entities()).toContainEqual(expect.objectContaining({
+        date: '2022-01-01T10:00',
+        location: 'location',
+        content: 'content'
+      }));
+    });
   });
 });
