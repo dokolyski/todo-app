@@ -1,13 +1,15 @@
-import {TodoStore} from './todo.store';
-import {TODO_LIST_MOCK} from './__mocks__/todo-list.mock';
-import {createServiceFactory} from "@ngneat/spectator/jest";
-import {provideHttpClient} from "@angular/common/http";
-import {TodoApiService} from "./todo-api.service";
-import {of} from "rxjs";
-import {inject} from "@angular/core";
+import { TodoStore } from './todo.store';
+import { TODO_LIST_MOCK } from './__mocks__/todo-list.mock';
+import { createServiceFactory } from '@ngneat/spectator/jest';
+import { provideHttpClient } from '@angular/common/http';
+import { TodoApiService } from './todo-api.service';
+import { of } from 'rxjs';
 
 describe('TodoStore', () => {
-  const createStore = createServiceFactory({service: TodoStore, providers: [provideHttpClient()]});
+  const createStore = createServiceFactory({
+    service: TodoStore,
+    providers: [provideHttpClient()],
+  });
 
   it('should be created', () => {
     // Arrange
@@ -33,10 +35,31 @@ describe('TodoStore', () => {
       // Arrange
       const store = createStore().service;
       store.setTodoList([
-        /*past*/{id: 1, date: '2022-01-01T10:00', location: 'Home', content: 'content'},
-        /*past*/{id: 2, date: '2022-01-02T10:00', location: 'Home', content: 'content'},
-        /*past*/{id: 3, date: '2022-01-03T10:00', location: 'Home', content: 'content'},
-        /*future*/{id: 4, date: '2121-01-01T10:00', location: 'Home', content: 'content'}]);
+        /*past*/ {
+          id: 1,
+          date: '2022-01-01T10:00',
+          location: 'Home',
+          content: 'content',
+        },
+        /*past*/ {
+          id: 2,
+          date: '2022-01-02T10:00',
+          location: 'Home',
+          content: 'content',
+        },
+        /*past*/ {
+          id: 3,
+          date: '2022-01-03T10:00',
+          location: 'Home',
+          content: 'content',
+        },
+        /*future*/ {
+          id: 4,
+          date: '2121-01-01T10:00',
+          location: 'Home',
+          content: 'content',
+        },
+      ]);
 
       // Act & Assert
       expect(store.upcomingTodosNumber()).toEqual(1);
@@ -48,57 +71,96 @@ describe('TodoStore', () => {
       it('should set error message', async () => {
         // Arrange
         const spectator = createStore({
-          providers: [{
-            provide: TodoApiService, useValue: {
-              loadCoordinates: jest.fn(() => of({results: []}))
-            }
-          }]
+          providers: [
+            {
+              provide: TodoApiService,
+              useValue: {
+                loadCoordinates: jest.fn(() => of({ results: [] })),
+              },
+            },
+          ],
         });
         const store = spectator.service;
-        store.setTodoList([{id: 1, date: '2022-01-01T10:00', location: 'Home', content: 'content'}]);
+        store.setTodoList([
+          {
+            id: 1,
+            date: '2022-01-01T10:00',
+            location: 'Home',
+            content: 'content',
+          },
+        ]);
         const todo = store.entities()[0];
 
         // Act
         store.loadTemperatureForLocation(todo);
 
         // Assert
-        expect(spectator.inject(TodoApiService).loadCoordinates).toBeCalledWith({location: todo.location});
-        expect(store.entities()[0].temperatureLoadingError).toEqual('Coordinates not found');
+        expect(spectator.inject(TodoApiService).loadCoordinates).toBeCalledWith(
+          { location: todo.location },
+        );
+        expect(store.entities()[0].temperatureLoadingError).toEqual(
+          'Coordinates not found',
+        );
       });
     });
     describe('when location is found', () => {
       it('should set the loaded temperature', async () => {
         // Arrange
         const spectator = createStore({
-          providers: [{
-            provide: TodoApiService, useValue: {
-              loadCoordinates: jest.fn(() => of({results: [{geometry: {lat: 1, lng: 1}}]})),
-              loadTemperatureForCoordinates: jest.fn(() => of({
-                current: {temperature_2m: 20},
-                current_units: {temperature_2m: '°C'}
-              }))
-            }
-          }]
+          providers: [
+            {
+              provide: TodoApiService,
+              useValue: {
+                loadCoordinates: jest.fn(() =>
+                  of({ results: [{ geometry: { lat: 1, lng: 1 } }] }),
+                ),
+                loadTemperatureForCoordinates: jest.fn(() =>
+                  of({
+                    current: { temperature_2m: 20 },
+                    current_units: { temperature_2m: '°C' },
+                  }),
+                ),
+              },
+            },
+          ],
         });
         const store = spectator.service;
-        store.setTodoList([{id: 1, date: '2022-01-01T10:00', location: 'Home', content: 'content'},
-          {id: 2, date: '2022-01-02T10:00', location: 'Home', content: 'content'},]);
+        store.setTodoList([
+          {
+            id: 1,
+            date: '2022-01-01T10:00',
+            location: 'Home',
+            content: 'content',
+          },
+          {
+            id: 2,
+            date: '2022-01-02T10:00',
+            location: 'Home',
+            content: 'content',
+          },
+        ]);
         const todo = store.entities()[0];
 
         // Act
         store.loadTemperatureForLocation(todo);
 
         // Assert
-        expect(spectator.inject(TodoApiService).loadCoordinates).toBeCalledWith({location: todo.location});
-        expect(spectator.inject(TodoApiService).loadTemperatureForCoordinates).toBeCalledWith({
+        expect(spectator.inject(TodoApiService).loadCoordinates).toBeCalledWith(
+          { location: todo.location },
+        );
+        expect(
+          spectator.inject(TodoApiService).loadTemperatureForCoordinates,
+        ).toBeCalledWith({
           geometry: {
             lat: 1,
-            lng: 1
-          }
+            lng: 1,
+          },
         });
-        expect(store.entities()[0].temperature).toEqual({value: 20, unit: '°C'});
+        expect(store.entities()[0].temperature).toEqual({
+          value: 20,
+          unit: '°C',
+        });
       });
-
     });
   });
 });

@@ -5,7 +5,7 @@ const selectors = {
   todoListItem: '#todo-list-item',
   temperature: '#temperature',
   temperatureError: '#temperature-error',
-}
+};
 
 describe('UiTodoListComponent', () => {
   let spectator: Spectator<UiTodoListComponent>;
@@ -22,8 +22,18 @@ describe('UiTodoListComponent', () => {
   it('should display all passed todos', () => {
     // Arrange
     const todos = [
-      { id: 1, date: '2021-01-01T00:00', location: 'location 1', content: 'content 1' },
-      { id: 2, date: '2021-01-02T00:00', location: 'location 2', content: 'content 2' },
+      {
+        id: 1,
+        date: '2021-01-01T00:00',
+        location: 'location 1',
+        content: 'content 1',
+      },
+      {
+        id: 2,
+        date: '2021-01-02T00:00',
+        location: 'location 2',
+        content: 'content 2',
+      },
     ];
 
     // Act
@@ -38,8 +48,19 @@ describe('UiTodoListComponent', () => {
     it('should display the temperature', () => {
       // Arrange
       const todos = [
-        { id: 1, date: '2021-01-01T00:00', location: 'location 1', content: 'content 1', temperature: { value: 20, unit: '°C' } },
-        { id: 2, date: '2021-01-02T00:00', location: 'location 2', content: 'content 2' },
+        {
+          id: 1,
+          date: '2021-01-01T00:00',
+          location: 'location 1',
+          content: 'content 1',
+          temperature: { value: 20, unit: '°C' },
+        },
+        {
+          id: 2,
+          date: '2021-01-02T00:00',
+          location: 'location 2',
+          content: 'content 2',
+        },
       ];
 
       // Act
@@ -49,14 +70,25 @@ describe('UiTodoListComponent', () => {
       const temperature = spectator.query(selectors.temperature);
       expect(temperature).toHaveText('20°C');
     });
-  })
+  });
 
   describe('when temperatureLoadingError is set to the first todo', () => {
     it('should display the temperature error', () => {
       // Arrange
       const todos = [
-        { id: 1, date: '2021-01-01T00:00', location: 'location 1', content: 'content 1', temperatureLoadingError: 'Error loading temperature' },
-        { id: 2, date: '2021-01-02T00:00', location: 'location 2', content: 'content 2' },
+        {
+          id: 1,
+          date: '2021-01-01T00:00',
+          location: 'location 1',
+          content: 'content 1',
+          temperatureLoadingError: 'Error loading temperature',
+        },
+        {
+          id: 2,
+          date: '2021-01-02T00:00',
+          location: 'location 2',
+          content: 'content 2',
+        },
       ];
 
       // Act
@@ -66,5 +98,5 @@ describe('UiTodoListComponent', () => {
       const temperatureError = spectator.query(selectors.temperatureError);
       expect(temperatureError).toHaveText('Error loading temperature');
     });
-  })
+  });
 });

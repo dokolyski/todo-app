@@ -6,8 +6,8 @@ const selectors = {
   formFields: {
     date: 'input[name="date"]',
     location: 'input[name="location"]',
-    content: 'textarea[name="content"]'
-  }
+    content: 'textarea[name="content"]',
+  },
 };
 
 describe('UiAddTodoComponent', () => {
@@ -55,8 +55,8 @@ describe('UiAddTodoComponent', () => {
       expect(createTodoSpy).toHaveBeenCalledWith({
         date: '2022-01-01T10:00',
         location: 'location',
-        content: 'content'
+        content: 'content',
       });
     });
-  })
+  });
 });

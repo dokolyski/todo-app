@@ -1,5 +1,5 @@
-import {createHostFactory, SpectatorHost} from '@ngneat/spectator/jest';
-import {UiTodoFilterComponent} from './ui-todo-filter.component';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
+import { UiTodoFilterComponent } from './ui-todo-filter.component';
 
 const selectors = {
   searchInput: '#filterInput',
@@ -11,7 +11,10 @@ describe('UiTodoFilterComponent', () => {
   const searchTermChanged = jest.fn();
 
   beforeEach(() => {
-    spectator = createHost('<app-ui-todo-filter (searchTermChanged)="searchTermChanged($event)"/>', {hostProps: {searchTermChanged}});
+    spectator = createHost(
+      '<app-ui-todo-filter (searchTermChanged)="searchTermChanged($event)"/>',
+      { hostProps: { searchTermChanged } },
+    );
   });
 
   it('should create', () => {
@@ -23,7 +26,10 @@ describe('UiTodoFilterComponent', () => {
     const searchTerm = 'search term';
 
     // Act
-    spectator.typeInElement(searchTerm, spectator.query(selectors.searchInput)!);
+    spectator.typeInElement(
+      searchTerm,
+      spectator.query(selectors.searchInput)!,
+    );
 
     // Assert
     expect(searchTermChanged).toHaveBeenCalledWith(searchTerm);

@@ -1,10 +1,10 @@
-import {Routes} from '@angular/router';
-import {UiWelcomeComponent} from "../ui-welcome/ui-welcome.component";
+import { Routes } from '@angular/router';
+import { UiWelcomeComponent } from '../ui-welcome/ui-welcome.component';
 
 export const PATHS = {
   todoListPage: 'list',
   addTodoPage: 'add',
-  welcomePage: ''
+  welcomePage: '',
 } as const;
 
 export const routes: Routes = [
@@ -15,14 +15,16 @@ export const routes: Routes = [
   },
   {
     path: PATHS.todoListPage,
-    loadComponent: () => import('../feature-todo-list').then(m => m.FeatureTodoListComponent),
+    loadComponent: () =>
+      import('../feature-todo-list').then((m) => m.FeatureTodoListComponent),
   },
   {
     path: PATHS.addTodoPage,
-    loadComponent: () => import('../feature-add-todo').then(m => m.FeatureAddTodoComponent),
+    loadComponent: () =>
+      import('../feature-add-todo').then((m) => m.FeatureAddTodoComponent),
   },
   {
     path: '**',
-    redirectTo:  PATHS.welcomePage,
-  }
+    redirectTo: PATHS.welcomePage,
+  },
 ];

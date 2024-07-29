@@ -8,9 +8,8 @@ describe('UiWelcomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UiWelcomeComponent]
-    })
-    .compileComponents();
+      imports: [UiWelcomeComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UiWelcomeComponent);
     component = fixture.componentInstance;

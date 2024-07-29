@@ -1,4 +1,4 @@
-import {Todo} from "../todo.store";
+import { Todo } from '../todo.store';
 
 export const TODO_LIST_MOCK: Todo[] = [
   {
@@ -30,5 +30,5 @@ export const TODO_LIST_MOCK: Todo[] = [
     date: '2024-08-20T10:00',
     location: 'Home',
     content: 'Mow the lawn',
-  }
+  },
 ];

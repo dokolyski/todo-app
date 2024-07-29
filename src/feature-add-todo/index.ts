@@ -1,1 +1,1 @@
-export * from './feature-add-todo.component'
+export * from './feature-add-todo.component';

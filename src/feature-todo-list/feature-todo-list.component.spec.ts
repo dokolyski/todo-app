@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeatureTodoListComponent } from './feature-todo-list.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('FeatureTodoListComponent', () => {
   let component: FeatureTodoListComponent;
@@ -8,9 +9,9 @@ describe('FeatureTodoListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FeatureTodoListComponent]
-    })
-    .compileComponents();
+      imports: [FeatureTodoListComponent],
+      providers: [provideHttpClient()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FeatureTodoListComponent);
     component = fixture.componentInstance;

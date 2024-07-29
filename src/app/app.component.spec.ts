@@ -1,10 +1,10 @@
-import {createComponentFactory} from '@ngneat/spectator/jest';
-import {AppComponent} from './app.component';
-import {PATHS, routes} from "./app.routes";
-import {TodoStore} from "../data-access-todo";
-import {signal} from "@angular/core";
-import {provideHttpClient} from "@angular/common/http";
-import {provideRouter} from "@angular/router";
+import { createComponentFactory } from '@ngneat/spectator/jest';
+import { AppComponent } from './app.component';
+import { PATHS, routes } from './app.routes';
+import { TodoStore } from '../data-access-todo';
+import { signal } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 const selectors = {
   mobileMenu: '#mobile-menu',
@@ -16,7 +16,7 @@ const selectors = {
   desktopGotoList: '#desktop-goto-list',
   desktopGotoAdd: '#desktop-goto-add',
 
-  upcomingTodosBadge: '.badge'
+  upcomingTodosBadge: '.badge',
 };
 
 describe('AppComponent', () => {
@@ -60,19 +60,22 @@ describe('AppComponent', () => {
 
   describe('routing', () => {
     describe('desktop', () => {
-
       it('button navigating to the list page should has correct href', () => {
         // Arrange
         const spectator = createComponent();
         // Assert
-        expect(spectator.query(selectors.desktopGotoList)!.getAttribute('href')).toEqual('/' + PATHS.todoListPage);
-      })
+        expect(
+          spectator.query(selectors.desktopGotoList)!.getAttribute('href'),
+        ).toEqual('/' + PATHS.todoListPage);
+      });
 
       it('button navigating to the add page should has correct href', () => {
         // Arrange
         const spectator = createComponent();
         // Assert
-        expect(spectator.query(selectors.desktopGotoAdd)!.getAttribute('href')).toEqual('/' + PATHS.addTodoPage);
+        expect(
+          spectator.query(selectors.desktopGotoAdd)!.getAttribute('href'),
+        ).toEqual('/' + PATHS.addTodoPage);
       });
     });
 
@@ -84,8 +87,10 @@ describe('AppComponent', () => {
         spectator.click(selectors.mobileMenuButton);
 
         // Assert
-        expect(spectator.query(selectors.mobileGotoList)!.getAttribute('href')).toEqual('/' + PATHS.todoListPage);
-      })
+        expect(
+          spectator.query(selectors.mobileGotoList)!.getAttribute('href'),
+        ).toEqual('/' + PATHS.todoListPage);
+      });
 
       it('button navigating to the add page should has correct href', () => {
         // Arrange
@@ -94,7 +99,9 @@ describe('AppComponent', () => {
         spectator.click(selectors.mobileMenuButton);
 
         // Assert
-        expect(spectator.query(selectors.mobileGotoAdd)!.getAttribute('href')).toEqual('/' + PATHS.addTodoPage);
+        expect(
+          spectator.query(selectors.mobileGotoAdd)!.getAttribute('href'),
+        ).toEqual('/' + PATHS.addTodoPage);
       });
     });
   });
@@ -104,10 +111,15 @@ describe('AppComponent', () => {
       it('should not display the badge', () => {
         // Arrange
         createComponent({
-          providers: [{
-            provide: TodoStore,
-            useValue: {upcomingTodosNumber: signal(0)}
-          }]
+          providers: [
+            {
+              provide: TodoStore,
+              useValue: {
+                upcomingTodosNumber: signal(0),
+                setTodoList: jest.fn(),
+              },
+            },
+          ],
         });
 
         // Assert
@@ -119,10 +131,15 @@ describe('AppComponent', () => {
       it('should display the number of upcoming todos in the badge', async () => {
         // Arrange
         createComponent({
-          providers: [{
-            provide: TodoStore,
-            useValue: {upcomingTodosNumber: signal(3)}
-          }]
+          providers: [
+            {
+              provide: TodoStore,
+              useValue: {
+                upcomingTodosNumber: signal(3),
+                setTodoList: jest.fn(),
+              },
+            },
+          ],
         });
 
         expect(selectors.upcomingTodosBadge).toContainText('3');
