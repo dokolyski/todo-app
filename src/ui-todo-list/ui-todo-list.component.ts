@@ -7,6 +7,11 @@ export interface UiTodo {
   date: DateTimeString;
   location: string;
   content: string;
+  temperature?: {
+    value: number;
+    unit: string;
+  };
+  temperatureLoadingError?: string;
 }
 
 @Component({
@@ -19,5 +24,5 @@ export interface UiTodo {
   styleUrl: './ui-todo-list.component.scss'
 })
 export class UiTodoListComponent {
-readonly todos = input<UiTodo[]>([]);
+  readonly todos = input<UiTodo[]>([]);
 }

@@ -2,9 +2,15 @@
   @for (todo of todos(); track todo.id) {
     <li id="todo-list-item" class="flex justify-between gap-x-6 py-5">
       <div class="flex items-center min-w-0 gap-x-4">
-          <p class="min-w-0 text-sm font-semibold leading-6 text-gray-900">{{ todo.content }}</p> <p class="text-sm leading-5 text-gray-500">({{ todo.location }})</p>
+        <p class="min-w-0 text-sm font-semibold leading-6 text-gray-900">{{ todo.content }}</p>
+        <p class="text-sm leading-5 text-gray-500">({{ todo.location }})
+          @if (todo.temperature) {
+            <span id="temperature" class="text-indigo-700">{{ todo.temperature.value }}{{ todo.temperature.unit }}</span>
+          } @else if (todo.temperatureLoadingError) {
+            <span id="temperature-error" class="text-red-700">{{ todo.temperatureLoadingError }}</span>
+          }</p>
       </div>
-        <p class="items-end text-sm leading-6 text-gray-900">{{ todo.date | date: 'YYYY-MM-dd H:mm' }}</p>
+      <p class="items-end text-sm leading-6 text-gray-900">{{ todo.date | date: 'YYYY-MM-dd H:mm' }}</p>
     </li>
   }
 </ul>

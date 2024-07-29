@@ -1,5 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faGhost} from '@fortawesome/free-solid-svg-icons';
 import {PATHS} from "./app.routes";
@@ -8,7 +8,7 @@ import {TodoStore} from "../data-access-todo";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FontAwesomeModule],
+  imports: [RouterOutlet, FontAwesomeModule, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

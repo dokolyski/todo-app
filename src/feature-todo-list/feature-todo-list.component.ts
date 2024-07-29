@@ -16,6 +16,7 @@ import {UiTodoListComponent} from "../ui-todo-list/ui-todo-list.component";
 export class FeatureTodoListComponent {
   constructor() {
     this._todoStore.setSearchTerm('');
+    this._todoStore.loadTemperatureForLocation(computed(() => this._todoStore.entities()[0], {equal: (a, b) => a.id === b.id}));
   }
 
   private readonly _todoStore = inject(TodoStore);

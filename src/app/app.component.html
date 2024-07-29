@@ -23,9 +23,9 @@
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a id="desktop-goto-list" [href]="PATHS.todoListPage"
+            <a id="desktop-goto-list" [routerLink]="PATHS.todoListPage"
                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">List</a>
-            <a id="desktop-goto-add" [href]="PATHS.addTodoPage"
+            <a id="desktop-goto-add" [routerLink]="PATHS.addTodoPage"
                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add</a>
           </div>
         </div>
@@ -50,9 +50,9 @@
   @if (mobileMenuOpened()) {
     <div class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
-        <a id="mobile-goto-list" [href]="PATHS.todoListPage"
+        <a id="mobile-goto-list" [routerLink]="PATHS.todoListPage"
            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">List</a>
-        <a id="mobile-goto-add" [href]="PATHS.addTodoPage"
+        <a id="mobile-goto-add" [routerLink]="PATHS.addTodoPage"
            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add</a>
       </div>
     </div>
