@@ -19,4 +19,19 @@ describe('TodoStore', () => {
       expect(store.filteredTodos().length).toEqual(3);
     });
   });
+
+  describe('upcomingTodosNumber', () => {
+    it('should count upcoming todos', async () => {
+      // Arrange
+      const store = new TodoStore();
+      store.setTodoList([
+        /*past*/{id: 1, date: '2022-01-01T10:00', location: 'Home', content: 'content'},
+        /*past*/{id: 2, date: '2022-01-02T10:00', location: 'Home', content: 'content'},
+        /*past*/{id: 3, date: '2022-01-03T10:00', location: 'Home', content: 'content'},
+        /*future*/{id: 4, date: '2121-01-01T10:00', location: 'Home', content: 'content'}]);
+
+      // Act & Assert
+      expect(store.upcomingTodosNumber()).toEqual(1);
+    });
+  });
 });

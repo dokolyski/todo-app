@@ -39,7 +39,8 @@ export const TodoStore = signalStore(
   })),
   withComputed((store) => ({
     filteredTodos: computed(() => store.entities().filter(todo => isMatchingSearchTerm(store.searchTerm().trim().split(' '), todo, ['date', 'location', 'content']))),
-  }))
+    upcomingTodosNumber: computed(() => store.entities().filter(todo => new Date(todo.date) > new Date()).length)
+  })),
 )
 
 // works only assuming that existing entities have ids in range 1..entitiesLength
