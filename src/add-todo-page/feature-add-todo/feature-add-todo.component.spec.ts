@@ -1,7 +1,7 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
 import { FeatureAddTodoComponent } from './feature-add-todo.component';
-import { PATHS } from '../app/app.routes';
-import { TodoStore } from '../data-access-todo';
+import { PATHS } from '../../app/app.routes';
+import { TodoStore } from '../../data-access-todo';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('FeatureAddTodoComponent', () => {

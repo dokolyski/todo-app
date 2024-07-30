@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { DateTimeString } from '../shared/types/date-time-string.type';
+import { DateTimeString } from '../../shared/types/date-time-string.type';
 import { DatePipe } from '@angular/common';
 
 export interface UiTodo {

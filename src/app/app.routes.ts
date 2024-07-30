@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { UiWelcomeComponent } from '../ui-welcome/ui-welcome.component';
+import { UiWelcomeComponent } from '../welcome-page';
 
 export const PATHS = {
   todoListPage: 'list',
@@ -16,12 +16,12 @@ export const routes: Routes = [
   {
     path: PATHS.todoListPage,
     loadComponent: () =>
-      import('../feature-todo-list').then((m) => m.FeatureTodoListComponent),
+      import('../todo-list-page').then((m) => m.FeatureTodoListComponent),
   },
   {
     path: PATHS.addTodoPage,
     loadComponent: () =>
-      import('../feature-add-todo').then((m) => m.FeatureAddTodoComponent),
+      import('../add-todo-page').then((m) => m.FeatureAddTodoComponent),
   },
   {
     path: '**',

@@ -4,7 +4,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DateTimeString } from '../shared/types/date-time-string.type';
+import { DateTimeString } from '../../shared/types/date-time-string.type';
 
 export type UiAddTodoFormValue = ReturnType<
   typeof UiAddTodoComponent.prototype.form.getRawValue

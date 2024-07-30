@@ -4,8 +4,8 @@ import {
   UiAddTodoFormValue,
 } from '../ui-add-todo/ui-add-todo.component';
 import { Router } from '@angular/router';
-import { PATHS } from '../app/app.routes';
-import { TodoStore } from '../data-access-todo';
+import { PATHS } from '../../app/app.routes';
+import { TodoStore } from '../../data-access-todo';
 
 @Component({
   selector: 'app-feature-add-todo',

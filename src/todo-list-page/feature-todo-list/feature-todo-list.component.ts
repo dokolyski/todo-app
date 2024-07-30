@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { TodoStore } from '../data-access-todo';
+import { TodoStore } from '../../data-access-todo';
 import { UiTodoFilterComponent } from '../ui-todo-filter/ui-todo-filter.component';
 import { UiTodoListComponent } from '../ui-todo-list/ui-todo-list.component';
 
